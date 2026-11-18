@@ -25,9 +25,9 @@ on:
         required: false
         default: ''
       max_gb:
-        description: '本轮总量上限(GiB)，0=不限'
+        description: '本轮总量上限(GiB)，0=不限；实测 ~20 MiB/s，290 分钟能装到 ~130+'
         required: false
-        default: '60'
+        default: '150'
       max_files:
         description: '本轮文件数上限，0=不限'
         required: false
