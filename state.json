@@ -9,8 +9,189 @@
    "size": 4003728840,
    "ts": "2026-11-18 12:52",
    "mibps": 22.91
+  },
+  "APNS-121.mp4": {
+   "size": 5350877074,
+   "ts": "2026-11-19 00:04",
+   "mibps": 18.55
+  },
+  "zigouSONE-940_rfdertr-v6LTXmax.mp4": {
+   "size": 5444689056,
+   "ts": "2026-11-19 00:08",
+   "mibps": 20.33
+  },
+  "PPPD-424.restored [美颜版].mp4": {
+   "size": 5483489069,
+   "ts": "2026-11-19 00:13",
+   "mibps": 18.8
+  },
+  "SNOS-221.restored.mp4": {
+   "size": 5622588350,
+   "ts": "2026-11-19 00:17",
+   "mibps": 24.93
+  },
+  "MIDA-670_restored_wm.mp4": {
+   "size": 5931836896,
+   "ts": "2026-11-19 00:21",
+   "mibps": 21.07
+  },
+  "DVAJ-016-U-LTX.mp4": {
+   "size": 5957231950,
+   "ts": "2026-11-19 00:26",
+   "mibps": 19.43
+  },
+  "AVOP-127_rfdertr-v6LTXpro.mp4": {
+   "size": 6269967696,
+   "ts": "2026-11-19 00:30",
+   "mibps": 24.9
+  },
+  "DDFF-045-LTX.mp4": {
+   "size": 6324153486,
+   "ts": "2026-11-19 00:35",
+   "mibps": 20.92
   }
  },
- "failed": {},
+ "failed": {
+  "VDD-121_restored-LTX.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:19 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "ABP-393_restored（有水印）.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:19 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "snis-951_restored_wm.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:19 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "WANZ-940_restored_wm.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:19 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "IPX-564_restored_LTX.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:19 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "IPX-528_restored_wm.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:19 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "SSNI-476_restored_LTX.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:19 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "SONE-573_restored_wm.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:19 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "HUBLK-062ch.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:19 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "IPZZ-376_restored_LTX.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:19 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "SAME-166_restored.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:19 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "STARS-734.restored.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:19 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "REAL-995.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:19 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "REAL-995_restored_wm.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:19 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "ABW-339_restored_wm.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "START-473_restored_wm.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "ABP-347 痉孪试验人生初絶顶-上原瑞穂_restored_wm.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "ipx-724_restored.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "IPX-451_restored_wm.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "MNGS-060_restored_wm.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "SDDE-728.restored v2（有水印）.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "IPZ-462_JASNA.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "CAWD-386_restored_LTX.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "STSK-213.restored.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "SSIS-698_restored.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "SSNI-355.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "AVOP-301_restored-LTX.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "START-255.restored.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "ssni-677_U-4k60_iris3.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "JUX-612.restored_iris2.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "ABW-183-U.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "MIDV-751-4k.restored.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "SONE-563_4K60FPS.restored.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "MIDV-289-4K-U.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  },
+  "PFES-081.restored_prob4.mp4": {
+   "ts": "2026-11-19 00:35",
+   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
+  }
+ },
  "oversize": []
 }
