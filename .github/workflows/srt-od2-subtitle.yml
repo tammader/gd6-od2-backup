@@ -1,0 +1,107 @@
+name: srt-od2-subtitle
+
+# gd6:out3 根目录 → od2:字幕   单向备份（copy：源端只读，不删不移）
+#
+#   选片三条同时成立：
+#     1) 只在 out3 的**根目录**（lsjson 非递归，不进子目录）
+#     2) 文件名以 已处理_ 开头，且 .srt 结尾（大小写不敏感）
+#     3) 字节数 > min_kb * 1024（默认 >1 KiB，小残片不搬）
+#
+#   幂等：目标端「同名 + 字节数一致」= 已备份 → 跳过 → 可以反复跑
+#   增量：靠两边 lsjson 比对；state_srt.json 只是记账（判断看目标端真实状态）
+#   跨盘没有 server-side copy，rclone 走 runner 中转（srt 都是小文件，一次 copy --files-from 批量搬）
+#
+# 需要 Secret: RCLONE_CONF —— 含 [gd6] 和 [od2] 两个 remotes 的 rclone.conf 全文
+#             （与 gd6-od2-backup 共用同一份 Secret，无需新增）
+
+on:
+  schedule:
+    - cron: '25 13 * * *'      # 每天 1 次；北京 21:25
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: 'true=真拷; false=只演练(默认)'
+        required: false
+        default: 'false'
+      min_kb:
+        description: '只搬大于该 KiB 的文件（默认 1 = 大于 1 KiB）'
+        required: false
+        default: '1'
+      only:
+        description: '只处理名字含该子串的文件(调试用)'
+        required: false
+        default: ''
+      max_files:
+        description: '本轮文件数上限，0=不限'
+        required: false
+        default: '0'
+      budget_min:
+        description: '本轮时间预算(分钟)'
+        required: false
+        default: '20'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: srt-od2-subtitle
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SRT_SRC: 'gd6:out3'
+      SRT_DST: 'od2:字幕'
+      SRT_PREFIX: '已处理_'
+      SRT_STATE: 'state_srt.json'
+      SRT_REPORT: 'srt_report.txt'
+      RCLONE_CONF_PATH: '/tmp/rclone.conf'
+      APPLY: ${{ github.event.inputs.apply || 'true' }}
+      MIN_KB: ${{ github.event.inputs.min_kb || '1' }}
+      ONLY_NAME: ${{ github.event.inputs.only || '' }}
+      MAX_FILES: ${{ github.event.inputs.max_files || '0' }}
+      BUDGET_MIN: ${{ github.event.inputs.budget_min || '20' }}
+      TG_TOKEN: ${{ secrets.TG_TOKEN }}
+      TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+      PYTHONIOENCODING: utf-8
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 装 rclone 并落 conf
+        env:
+          RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
+        run: |
+          set -e
+          if [ -z "$RCLONE_CONF" ]; then echo "!! 缺 Secret RCLONE_CONF"; exit 2; fi
+          printf '%s' "$RCLONE_CONF" > /tmp/rclone.conf
+          chmod 600 /tmp/rclone.conf
+          curl -s https://downloads.rclone.org/rclone-current-linux-amd64.zip -o /tmp/r.zip
+          unzip -q -o /tmp/r.zip -d /tmp
+          cp /tmp/rclone-*/rclone /usr/local/bin/
+          rclone version | head -1
+          echo "remotes:"; grep -E '^\[' /tmp/rclone.conf | sed 's/^/  /'
+          echo "源目录抽样:"; rclone --config /tmp/rclone.conf lsf "$SRT_SRC" --max-depth 1 | head -5 || true
+
+      - name: 备份 srt
+        run: |
+          set -e
+          ARGS="--min-kb $MIN_KB --budget-min $BUDGET_MIN --max-files $MAX_FILES"
+          if [ "$APPLY" = "true" ]; then ARGS="$ARGS --apply"; else echo "(演练模式)"; fi
+          if [ -n "$ONLY_NAME" ]; then ARGS="$ARGS --only $ONLY_NAME"; fi
+          python3 tools/srt_od2_subtitle.py $ARGS
+
+      - name: 提交 state / 报告
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f state_srt.json srt_report.txt 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "no state change"
+          else
+            git commit -m "chore: srt->od2字幕 $(date -u +%Y-%m-%dT%H:%M)"
+            for i in 1 2 3; do git pull --rebase --autostash origin main && git push && break; echo retry $i; sleep 5; done
+          fi
