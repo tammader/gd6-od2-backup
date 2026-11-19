@@ -1,0 +1,87 @@
+name: srt-pack
+
+# 把 od2:字幕 里的 srt 整包拉下来打成一个 zip，作为 artifact 挂 14 天
+#   * 只读：rclone copy（不删不移），不改远端任何东西
+#   * 打包后打印 文件数 / 体积 / zip 大小，作为成功信号
+#   * 本机用 Actions artifacts API 取回 → 落到桌面
+#
+# 需要 Secret: RCLONE_CONF —— 含 [gd6] 和 [od2]（与 gd6-od2-backup 共用）
+
+on:
+  workflow_dispatch:
+    inputs:
+      src:
+        description: '要打包的远端目录'
+        required: false
+        default: 'od2:字幕'
+      include:
+        description: '文件名匹配（rclone --include，默认 *.srt）'
+        required: false
+        default: '*.srt'
+      min_kb:
+        description: '丢掉小于该 KiB 的文件（默认 1，与备份规则一致）'
+        required: false
+        default: '1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: srt-pack
+  cancel-in-progress: true
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SRC: ${{ github.event.inputs.src || 'od2:字幕' }}
+      INCLUDE: ${{ github.event.inputs.include || '*.srt' }}
+      MIN_KB: ${{ github.event.inputs.min_kb || '1' }}
+      RCLONE_CONF_PATH: '/tmp/rclone.conf'
+
+    steps:
+      - name: 装 rclone 并落 conf
+        env:
+          RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
+        run: |
+          set -e
+          if [ -z "$RCLONE_CONF" ]; then echo "!! 缺 Secret RCLONE_CONF"; exit 2; fi
+          printf '%s' "$RCLONE_CONF" > /tmp/rclone.conf
+          curl -s https://downloads.rclone.org/rclone-current-linux-amd64.zip -o /tmp/r.zip
+          unzip -q -o /tmp/r.zip -d /tmp
+          cp /tmp/rclone-*/rclone /usr/local/bin/
+          rclone version | head -1
+
+      - name: 拉下来并过滤
+        run: |
+          set -e
+          mkdir -p /tmp/pack
+          rclone --config /tmp/rclone.conf copy "$SRC" /tmp/pack \
+            --include "$INCLUDE" \
+            --min-size "${MIN_KB}k" \
+            --transfers 16 --checkers 16 --retries 3 \
+            --stats 15s --stats-one-line
+          N=$(find /tmp/pack -type f -name '*.srt' | wc -l)
+          T=$(du -sh /tmp/pack | cut -f1)
+          echo "PACK_FILES=$N"
+          echo "PACK_SIZE=$T"
+          echo "--- 前 5 个 ---"
+          find /tmp/pack -type f -name '*.srt' -printf '%s\t%f\n' | sort -k1,1nr | head -5
+
+      - name: 打包
+        run: |
+          set -e
+          cd /tmp/pack
+          ZIP="srt-od2-字幕-$(date -u +%Y%m%d-%H%M).zip"
+          zip -q -r "/tmp/$ZIP" . -i '*.srt'
+          echo "ZIP_NAME=$ZIP" >> $GITHUB_ENV
+          ls -l "/tmp/$ZIP"
+          echo "ZIP_BYTES=$(stat -c%s "/tmp/$ZIP")"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: srt-od2-pack
+          path: /tmp/srt-od2-*.zip
+          retention-days: 14
+          if-no-files-found: error
