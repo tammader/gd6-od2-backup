@@ -4,8 +4,8 @@ name: gd6-od2-backup
 #
 #   * 判断幂等：目标端「同名 + 字节数一致」= 已备份 → 跳过
 #   * 跨盘没有 server-side copy，rclone 只能 runner 中转：
-#       - 小文件正常 copyto（落 /tmp，可重来）
-#       - > streaming_over_gb 的文件加 --streaming-upload，边读边写不吃磁盘（30GB+ 也能过）
+#       - 全部走 rclone copyto：跨远端直传、全程流式，不落 runner 本地磁盘（30GB+ 也能过）
+#       - streaming_over_gb 只是记账阈值，不拼任何额外 rclone 开关
 #   * 单轮有 时间/文件数/总量 三道闸，到点收工，下一轮接着搬
 #   * state.json 记账并 commit 回仓库（不是判断依据，判断看目标端真实状态）
 #
