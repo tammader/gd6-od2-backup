@@ -5,9 +5,10 @@
 增量：靠两边 lsjson 比对；state.json 只是记账，不是判断依据（判断看目标端真实状态）。
 
 跨盘没有 server-side copy，rclone 只能「下载到 runner → 上传到目标」：
-  * 小于 --streaming-over-gb 的文件：正常 copyto（落 /tmp 再传，可断点重来）
-  * 大于该值的文件：加 --streaming-upload 边读边写，不吃磁盘（速度低些但放得下 30GB+）
-  * 剩余磁盘不够又不走 streaming 的，直接跳过并记 oversize，明说原因
+  * 所有文件都走 rclone copyto：跨远端复制本身就是流式的（源→目标直传，
+    只有 --buffer-size 在内存中转），不落 runner 本地磁盘，大小不限（30GB+ 也能过）
+  * --streaming-over-gb 只是把大于该值的文件标记成 streaming 记账，
+    不再拼任何额外 rclone 开关（2026-11-20 前这里拼过不存在的 --streaming-upload）
 
 用法：
   python3 tools/gd6_od2_copy.py                     # 演练：只打计划
@@ -69,10 +70,13 @@ def copy_one(name, size, streaming=False, retries=3):
             '--contimeout', '1m',
             '--stats-one-line', '--stats', '30s']
     if streaming:
-        args += ['--streaming-upload', '--ignore-checksum']
+        # 2026-11-20 修：rclone 没有 --streaming-upload 这个开关，拼上去会在参数解析阶段
+        # 直接 unknown flag 退出（一个字节都不读），>streaming_over_gb 的文件因此全部秒失败。
+        # 跨远端 copyto 本身就是流式的，不落 runner 本地磁盘，不需要任何额外开关。
+        args += ['--ignore-checksum']
     t0 = time.time()
     r = rclone(args, timeout=18000, check=False)
-    return (r.returncode == 0), time.time() - t0, (r.stderr or '')[-300:]
+    return (r.returncode == 0), time.time() - t0, (r.stderr or '')[:400]
 
 
 def load_state():
@@ -111,7 +115,7 @@ def main():
     ap.add_argument('--budget-min', type=int, default=300, help='本轮时间预算(分钟)')
     ap.add_argument('--reserve-gb', type=float, default=8, help='给 runner 留的磁盘余量')
     ap.add_argument('--streaming-over-gb', type=float, default=6,
-                    help='大于该值的文件走 --streaming-upload（不吃磁盘）')
+                    help='大于该值的文件标记为 streaming（仅记账；copyto 本身即流式，不落盘）')
     ap.add_argument('--order', default='small', choices=['small', 'large', 'name'])
     a = ap.parse_args()
 
@@ -192,7 +196,7 @@ def main():
             free -= 0 if streaming else s
         else:
             log('  ✗ 失败: %s' % err.replace('\n', ' ')[:200])
-            st['failed'][n] = {'ts': time.strftime('%Y-%m-%d %H:%M'), 'err': err[-200:]}
+            st['failed'][n] = {'ts': time.strftime('%Y-%m-%d %H:%M'), 'err': err[:200]}
             fails.append(n)
         save_state(st)
 
@@ -202,6 +206,11 @@ def main():
         % (done_n, human(done_b), len(fails), max(0, left), el))
     tg('gd6:老 → od2:老\n本轮 %d 个 / %s，失败 %d，待办剩 %d，用时 %.0f 分钟'
        % (done_n, human(done_b), len(fails), max(0, left), el))
+
+    # 2026-11-20 修：全挂却报 success 会骗人（11-19 那轮 36 个全失败、CI 仍是绿的）
+    if fails and not done_n:
+        log('!! 本轮 %d 个全失败，0 个成功 -> 以非零退出，让 CI 变红' % len(fails))
+        sys.exit(1)
 
 
 if __name__ == '__main__':
