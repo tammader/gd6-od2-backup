@@ -129,33 +129,39 @@
    "size": 8461353474,
    "ts": "2026-11-20 21:13",
    "mibps": 18.19
+  },
+  "START-473_restored_wm.mp4": {
+   "size": 8548235394,
+   "ts": "2026-11-21 07:16",
+   "mibps": 24.56
+  },
+  "ABP-347 痉孪试验人生初絶顶-上原瑞穂_restored_wm.mp4": {
+   "size": 9529806819,
+   "ts": "2026-11-21 07:23",
+   "mibps": 22.14
+  },
+  "ipx-724_restored.mp4": {
+   "size": 9785506196,
+   "ts": "2026-11-21 07:29",
+   "mibps": 24.0
+  },
+  "IPX-451_restored_wm.mp4": {
+   "size": 10058990349,
+   "ts": "2026-11-21 07:36",
+   "mibps": 23.69
+  },
+  "MNGS-060_restored_wm.mp4": {
+   "size": 10914545168,
+   "ts": "2026-11-21 07:44",
+   "mibps": 21.45
+  },
+  "SDDE-728.restored v2（有水印）.mp4": {
+   "size": 11124299200,
+   "ts": "2026-11-21 07:55",
+   "mibps": 16.57
   }
  },
  "failed": {
-  "START-473_restored_wm.mp4": {
-   "ts": "2026-11-19 00:35",
-   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
-  },
-  "ABP-347 痉孪试验人生初絶顶-上原瑞穂_restored_wm.mp4": {
-   "ts": "2026-11-19 00:35",
-   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
-  },
-  "ipx-724_restored.mp4": {
-   "ts": "2026-11-19 00:35",
-   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
-  },
-  "IPX-451_restored_wm.mp4": {
-   "ts": "2026-11-19 00:35",
-   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
-  },
-  "MNGS-060_restored_wm.mp4": {
-   "ts": "2026-11-19 00:35",
-   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
-  },
-  "SDDE-728.restored v2（有水印）.mp4": {
-   "ts": "2026-11-19 00:35",
-   "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
-  },
   "IPZ-462_JASNA.mp4": {
    "ts": "2026-11-19 00:35",
    "err": "a command.\nUse \"rclone help flags\" for to see the global flags.\nUse \"rclone help backends\" for a list of supported services.\n\n2026/11/19 00:35:20 NOTICE: Fatal error: unknown flag: --streaming-upload\n"
